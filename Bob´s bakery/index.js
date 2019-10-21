@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const products = require('./routes/products');
+const orders = require('./routes/orders');
 const user = require('./routes/users');
 const port = process.env.port || 5000;
 
@@ -16,5 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use("/user", user);
 app.use("/products", products);
+app.use("/orders", orders);
 app.set('views', './Views')
 app.set('view engine', 'ejs');

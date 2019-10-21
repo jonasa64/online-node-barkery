@@ -23,7 +23,7 @@ return new Promise( (resolve, reject)  => {
 
 
 const findOrder = (orderId) => {
-const sql = `select * form orders where id = ${connection.escape(orderId)}`;
+const sql = `select * from orders where id = ${connection.escape(orderId)}`;
 return new Promise( (resolve, reject) => {
     connection.query(sql, (err, res) => {
         if(err){
