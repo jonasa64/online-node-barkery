@@ -35,7 +35,25 @@ resolve(res);
 });
  }
 
+ const findUserById = (userId)  => {
+    const sql = `select name from user where id = ${connection.escape(userId)} `;
+    return new Promise((resolve, reject) => {
+        connection.query(sql, (err, res) => {
+            if(err){
+                reject(err)
+            }
+
+            if(res.length < 1){
+                reject("user not found");
+            }
+
+            resolve(res)
+        });
+    });
+    }
+
 module.exports = {
     createUser: createUser,
-    validitUser : validitUser
+    validitUser : validitUser,
+    findUserById :  findUserById
 }
