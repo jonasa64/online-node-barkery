@@ -12,7 +12,11 @@ router.post('/add-order', (req, res) => {
     console.log(productId)
     console.log(quantity)
     console.log(totalPrice)
-    mapper.addOrder(userId, productId, quantity, totalPrice).then(order => console.log(order) ).catch(err => console.error(err));
+    mapper.addOrder(userId, productId, quantity, totalPrice).then(order => {
+        console.log(order)
+        mapper.findOrder(order.insertId).then(order => res.render(`order`,{order: order} ) ).catch(err => console.log(err));
+        
+    }  ).catch(err => console.error(err));
 })
 
 router.get('/add-order', (req, res) => {
@@ -26,8 +30,8 @@ router.get('/add-order', (req, res) => {
     
 })
 
-router.get('/order/:orderId', (req, res) => {
-    mapper.findOrder(req.params.orderId).then(order => res.render("order", {order: order}) ).catch(err => console.error(err));
+router.get('/order', (req, res) => {
+    mapper.findOrder(req.query.orderId).then(order => res.render(`order`, {order: order}) ).catch(err => console.error(err));
 })
 
 router.get('/userOrder/:userId', (req, res) => {

@@ -1,0 +1,12 @@
+<%order.forEach(function(o) {%>
+    <ul>
+      <li>Order number <%= o.id%></li>
+      <li>user id<%= o.userId%></li> 
+      <li>product id <%=o.productId%></li> 
+      <li>order date <%=o.orderDate%></li> 
+      <li>quantity <%=o.quantity%></li> 
+      <li> total price <%=o.totalPice%></li>
+ 
+  </ul>
+   
+      <%})%>
