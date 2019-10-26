@@ -1,8 +1,13 @@
 <h1>Hej products go here</h1>
 
-<%products.forEach(function(product) {%>
-<%= product.id%>
-<%= product.name%>
-<%product.description%>
-<%=product.price%>
-<%})%>
+    <%products.forEach(function(product) {%>
+      <ul>
+        <li><%= product.id%></li>
+        <li><%= product.name%></li> 
+        <li><%=product.description%></li> 
+        <li><%=product.price%></li> 
+    <li><a href="http://localhost:5000/orders/add-order?productId=<%=product.id%>">order</a></li>
+    </ul>
+     
+        <%})%>
+

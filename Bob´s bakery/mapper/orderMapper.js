@@ -6,6 +6,7 @@ ${quantity}, ${totalPice})`;
 
 return new Promise( (resolve, reject)  => {
     connection.query(sql, (err, res) => {
+
         if(err){
             reject(err);
         }
@@ -13,7 +14,7 @@ return new Promise( (resolve, reject)  => {
         if(res.length < 1){
             reject("falied to creat order");
         }
-
+   
         resolve(res);
     });
 });

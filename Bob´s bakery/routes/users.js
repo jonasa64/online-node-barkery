@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {check, validationResult} = require('express-validator')
 const mapper = require('../mapper/userMapper');
 
 
@@ -14,24 +15,31 @@ const password = req.body.password;
 
 mapper.validitUser(name,password).then(user => {
     
-            console.log(req.cookies)
-        req.session.name = user[0].name;
-        req.session.userid = user[0].id;
+
+        
+        if(name === user[0].name && password === user[0].password){
+            req.session.name = user[0].name;
+            req.session.userid = user[0].id;
+            res.render('profil',{userName:req.session.name})
+        }
+      
+        
  
-       res.render('profil',{userName:req.session.name})
+    
        
- console.log(req.session.userid)
+
   
 }).catch(err => {
+ 
+        res.render('login')
    
-    console.log(err);
-    res.render('login')
+   
 })
 
 });
 
 
-router.get('signup', (req, res) => {
+router.get('/signup', (req, res) => {
     res.render('signup');
 });
 

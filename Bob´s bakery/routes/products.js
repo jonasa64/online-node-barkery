@@ -3,10 +3,12 @@ const router = express.Router();
 const mapper = require('../mapper/productMapper');
 router.get("/", (req,res) => {
     mapper.getAllProducts().then(p =>{
+        console.log(req.session)
+        console.log(req.cookies)
         res.render("products", {products:p });
     } );
    
-console.log(mapper.getAllProducts());
+
     //res.render("products");
 });
 

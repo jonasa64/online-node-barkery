@@ -1,20 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const mapper = require('../mapper/orderMapper');
+const productMapper = require('../mapper/productMapper')
 
 router.post('/add-order', (req, res) => {
-    const userId = req.body.userId;
+    const userId = req.session.userid;
     const productId = req.body.productId;
-    const quantity = req.body.quantity;
-    const totalPrice = Number(req.body.totalPrice);
-    mapper.addOrder(userId, productId, quantity, totalPrice).then(order => res.redirect('/0') ).catch(err => console.error(err));
+    const quantity = Number(req.body.quantity);
+    const totalPrice =  Number(quantity * req.session.productPrice)
+    console.log(userId)
+    console.log(productId)
+    console.log(quantity)
+    console.log(totalPrice)
+    mapper.addOrder(userId, productId, quantity, totalPrice).then(order => console.log(order) ).catch(err => console.error(err));
 })
 
 router.get('/add-order', (req, res) => {
-    res.render('addOrder')
+    const id =  req.query.productId
+    productMapper.getProduct(id).then(product => {
+ 
+        req.session.productPrice = product[0].price;
+      
+        res.render('addOrder', {product: product});
+    })
+    
 })
 
-router.get('/:orderId', (req, res) => {
+router.get('/order/:orderId', (req, res) => {
     mapper.findOrder(req.params.orderId).then(order => res.render("order", {order: order}) ).catch(err => console.error(err));
 })
 
