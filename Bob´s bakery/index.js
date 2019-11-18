@@ -4,9 +4,9 @@ const products = require('./routes/products');
 const orders = require('./routes/orders');
 const user = require('./routes/users');
 const session = require('express-session');
-//const validator = require('express-validator')
 const port = process.env.port || 5000;
-//const {sessionChecker} = require('./middeleware');
+
+
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.listen(port, () => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
-//app.use(validator());
+
 
 
 

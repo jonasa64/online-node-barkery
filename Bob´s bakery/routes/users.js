@@ -43,14 +43,14 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.post('signup', (req, res) => {
+router.post('/signup', (req, res) => {
 const username = req.body.username;
 const password = req.body.password;
 mapper.createUser(username, password).then(user => {
     req.session.user = user;
-    res.redirect('/profil');
+    res.render('login')
 }).catch(err => {
-    res.render('/signup');
+    res.render('signup');
 console.log(err);
 })
 });
