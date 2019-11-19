@@ -1,23 +1,21 @@
 const connection = require('../config/sql');
+const util = require('util');
+const query = util.promisify(connection.query).bind(connection);
 
-const addOrder = (userId, productId, quantity, totalPice) => {
+const addOrder = async (userId, productId, quantity, totalPice) => {
 const sql = `insert into orders(userId, productId, quantity, totalPice) values(${connection.escape(userId)}, ${connection.escape(productId)},
 ${quantity}, ${totalPice})`;
+try {
+  const row =  await query(sql);
+  return row 
+} catch (error) {
+    return new Error("server error")
+} finally{
+    connection.end()
+}
 
-return new Promise( (resolve, reject)  => {
-    connection.query(sql, (err, res) => {
-
-        if(err){
-            reject(err);
-        }
-
-        if(res.length < 1){
-            reject("falied to creat order");
-        }
    
-        resolve(res);
-    });
-});
+
 
 }
 
@@ -25,73 +23,61 @@ return new Promise( (resolve, reject)  => {
 
 const findOrder = (orderId) => {
 const sql = `select * from orders where id = ${connection.escape(orderId)}`;
-return new Promise( (resolve, reject) => {
-    connection.query(sql, (err, res) => {
-        if(err){
-            reject(err);
-        }
+try {
+  const row =  await query(sql);
+  return row;
+} catch (error) {
+    return new Error("server error");
+} finally {
+    connection.end()
+}
+    
 
-        if(res.length < 1){
-            reject("order not found");
-        }
-
-        resolve(res);
-
-    });
-});
 }
 
 
-const uddatePayStatus = (orderId) => {
+const uddatePayStatus = async (orderId) => {
 const sql = `update orders set isPayed = true where id = ${connection.escape(orderId)}`;
-return new Promise( (resolve, reject ) => {
-    connection.query(sql, (err, res) => {
-        if(err){
-            reject(err);
-        }
+try {
+   const row =  await query(sql);
+   return row;
+} catch (error) {
+    return new Error("server Error");
+} finally {
+    connection.end()
+}
+    
 
-        if(res.length < 1){
-            reject('failed to update pay satatus');
-        }
-
-        resolve(res);
-    });
-}) ;
 
 }
 
-const findUsersOrder =   (userId) => {
+const findUsersOrder =   async (userId) => {
     const sql = `select * from orders where userId = ${connection.escape(userId)}`;
-    return new Promise( (resolve, reject) => {
-        connection.query(sql, (err, res) => {
-            if(err){
-                reject(err);
-            }
-
-            if(res.length < 1){
-                reject('orders not found');
-            }
-
-            resolve(res);
-        });
-    });
+   try {
+   const row = await query(sql);
+   return row;
+   } catch (error) {
+       return new Error("server error")
+   }
+       finally{
+           connection.end()
+       }
+   
 }
 
 const deletOrder = (orderId) => {
     const sql = `delete from orders where id = ${connection.escape(orderId)}`;
 
-    return new Promise( (resolve, reject) => {
-        connection.query(sql, (err, res) => {
-            if(err){
-                reject(err);
-            }
-
-            if(res.length < 1){
-                reject("failed");
-            }
-            resolve(res);
-        })
-    })
+    try {
+      const row =  await query(sql);
+        return row;
+    } catch (error) {
+        return new Error("server error");
+    } finally{
+        connection.end()
+    }
+        
+   
 }
 
 

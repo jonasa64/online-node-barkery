@@ -1,37 +1,36 @@
 const connection = require('../config/sql');
+const util = require('util');
+const query = util.promisify(connection.query).bind(connection);
 
-
-const getAllProducts = () => {
+const getAllProducts = async () => {
 const sql = "select * from  product";
-return new Promise((resolve, reject) => {
-    connection.query(sql, (err,result,fields) => {
-        if(err){
-           return reject(err);
-        }
+try {
+  const row =  await query(sql);
+  return row
+} catch (error) {
+    return new Error("server error")
+} finally{
+    connection.end()
+}
+    
 
-      
-      
-        resolve(result);
-      //connection.destroy();
-    } );
-} );
 
 
 }
 
-const getProduct = (id) => {
+const getProduct = async (id) => {
  
 const sql = "select * from product where id = " + connection.escape(id);
-return new Promise((resolve, reject) => {
-    connection.query(sql, (err, res) => {
-        if(err){
-            reject(err);
-        }
-        resolve(res);
-     
-        // connection.destroy();
-    })
-})
+
+   try {
+    const row =  await query(sql)  
+    return row;   
+} catch (error) {
+    return new Error("server Error");   
+   } finally {
+       connection.end()
+   }
+
 
 }
 
