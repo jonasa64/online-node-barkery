@@ -17,11 +17,11 @@ mapper.validitUser(name,password).then(user => {
     
 
         
-        if(name === user[0].name && password === user[0].password){
+       
             req.session.name = user[0].name;
             req.session.userid = user[0].id;
             res.render('profil',{userName:req.session.name, userid: req.session.userid})
-        }
+        
       
         
  

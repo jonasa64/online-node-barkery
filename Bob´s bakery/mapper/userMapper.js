@@ -5,42 +5,39 @@
  const query = util.promisify(connection.query).bind(connection);
  
  createUser = async (username, password) => {
-     //hashPassword = bcrypt.hashSync(password, salt);
-    const sql = `insert into user(name, password) values(${connection.escape(username)}, ${connection.escape(password)})`;
+     hashPassword = bcrypt.hashSync(password, salt);
+    const sql = `insert into user(name, password) values(${connection.escape(username)}, ${connection.escape(hashPassword)})`;
   try {
     const row =  await query(sql);
     return row;   
   } catch (error) {
       return new Error('server error');
-  } finally{
-      connection.end();
-  }
+  } 
    
 
    
  }
 
  validitUser = async (username , password) => {
-const sql = `select * from user where name = ${connection.escape(username)} and password = ${connection.escape(password)}`;
-try {
+    try {
+    const hashPassword  = await findUserByName(username); 
+
+    if(bcrypt.compareSync(password, hashPassword) ){
+        const sql = `select * from user where name = ${connection.escape(username)} and password = ${connection.escape(hashPassword)}`;
+
   const row =  await query(sql);
-    console.log(row);
     if(row.length < 1){
         return "user not found";  
     }
     return row;
-   
+}
 } catch (error) {
     return new Error("server error")
-}   finally{
-    connection.end()
+}  
+    
+
+
 }
-
-
-  
-
-
- }
 
  const findUserById = async (userId)  => {
     const sql = `select name from user where id = ${connection.escape(userId)} `;
@@ -49,12 +46,21 @@ try {
       return row;
     } catch (error) {
         return new Error('server error')
-    } finally{
-        connection.end()
-    }
+    } 
         
   
     }
+const findUserByName = async (username) => {
+    const sql = `select password from user where name = ${connection.escape(username)} `;
+    try {
+      const row =  await query(sql);
+      
+      return row[0].password;
+    } catch (error) {
+        return new Error('server error')
+    } 
+}
+
 
  
 

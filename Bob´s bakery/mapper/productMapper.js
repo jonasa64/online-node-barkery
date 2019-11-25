@@ -9,8 +9,6 @@ try {
   return row
 } catch (error) {
     return new Error("server error")
-} finally{
-    connection.end()
 }
     
 
@@ -27,8 +25,6 @@ const sql = "select * from product where id = " + connection.escape(id);
     return row;   
 } catch (error) {
     return new Error("server Error");   
-   } finally {
-       connection.end()
    }
 
 

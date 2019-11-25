@@ -10,8 +10,6 @@ try {
   return row 
 } catch (error) {
     return new Error("server error")
-} finally{
-    connection.end()
 }
 
    
@@ -21,15 +19,13 @@ try {
 
 
 
-const findOrder = (orderId) => {
+const findOrder = async (orderId) => {
 const sql = `select * from orders where id = ${connection.escape(orderId)}`;
 try {
   const row =  await query(sql);
   return row;
 } catch (error) {
     return new Error("server error");
-} finally {
-    connection.end()
 }
     
 
@@ -43,8 +39,6 @@ try {
    return row;
 } catch (error) {
     return new Error("server Error");
-} finally {
-    connection.end()
 }
     
 
@@ -59,13 +53,11 @@ const findUsersOrder =   async (userId) => {
    } catch (error) {
        return new Error("server error")
    }
-       finally{
-           connection.end()
-       }
+      
    
 }
 
-const deletOrder = (orderId) => {
+const deletOrder = async (orderId) => {
     const sql = `delete from orders where id = ${connection.escape(orderId)}`;
 
     try {
