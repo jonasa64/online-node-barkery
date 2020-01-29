@@ -25,6 +25,25 @@ exports.login = async (req, res) => {
     }
 }
 
+exports.getProfile = (req, res) => {
+    try {
+        req.flash("notify", "you are now logged in")
+
+        return res.render('profil', {username : req.session.name, id: req.session.userid});
+
+    }catch (error) {
+        return res.send("error");
+    }
+}
+
+exports.getSingupView = (req, res) => {
+    try {
+        return  res.render('signup');
+    }catch (error) {
+        res.send("error");
+    }
+}
+
 exports.signup = async (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -35,5 +54,14 @@ exports.signup = async (req,res) => {
       return  res.render('login')
     }catch (error) {
         return   res.render('signup');
+    }
+}
+
+exports.logout = (req, res) => {
+    try {
+        req.session.destroy();
+       return  res.render('login');
+    }catch (error) {
+        return res.send('error');
     }
 }
