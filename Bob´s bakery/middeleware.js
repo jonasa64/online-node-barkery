@@ -1,7 +1,9 @@
-module.exports.sessionChecker = (req, res, next) => {
-    if(req.session.user && req.cookies.user_barkery){
-        res.redirect('/profil')
+const sessionChecker = (req, res, next) => {
+    if(!req.session.userid){
+        res.redirect('http://localhost:5000/user/login');
     }else {
         next();
     }
 }
+
+module.exports = sessionChecker;
