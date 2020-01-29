@@ -1,3 +1,7 @@
-<h1>Hello <%=userName%></h1>
+<h1>welcom <%=username%></h1>
+<%var message = getMessages() %>
+<%if(message.notify){%>
+    <%= message.notify %>
+    <%}%> 
 <a href="http://localhost:5000/products/">products</a>
-<a href="http://localhost:5000/orders/userOrder/<%=userid%>">your orders</a>
+<a href="http://localhost:5000/orders/userOrder/<%=id%>">your orders</a>

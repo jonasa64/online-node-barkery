@@ -1,3 +1,7 @@
+ 
+<%if(order.length < 1){%>
+    <h1>you don't have any orders</h1>
+    <%}else{%>
 <%order.forEach(function(o) {%>
     <ul>
       <li>Order number <%= o.id%></li>
@@ -10,3 +14,4 @@
   </ul>
    
       <%})%>
+      <%}%>

@@ -1,4 +1,7 @@
-
+<%var message = getMessages() %>
+<%if(message.error){%>
+    <%= message.error %>
+    <%}%>
 
 <form action="login" method="post">
     <input type="text" placeholder="username" name="username">
