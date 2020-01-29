@@ -2,12 +2,11 @@ const express = require('express');
 const router = express.Router();
 const {check, validationResult} = require('express-validator')
 const mapper = require('../mapper/userMapper');
+const userController = require('../Controllers/user');
 const sessionChecker = require('../middeleware')
 
 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+router.get('/login', userController.getLoginView());
 
 router.get('/', sessionChecker, (req, res) => {
     req.flash("notify", "you are now logged in")       
@@ -16,37 +15,7 @@ router.get('/', sessionChecker, (req, res) => {
    
 })
 
-router.post('/login', (req,res) => {
-const name = req.body.username;
-const password = req.body.password;
-
-mapper.validitUser(name,password).then(user => {
-    
-
-    req.session.name = user[0].name;
-    req.session.userid = user[0].id;
-    
-
-     
-        
-        
-         res.redirect('http://localhost:5000/user');
-      
-        
- 
-    
-       
-
-  
-}).catch(err => {
- console.log(err)
- req.flash("error", "falied to login")       
- res.render('login')
-   
-   
-})
-
-});
+router.post('/login', userController.login());
 
 
 
