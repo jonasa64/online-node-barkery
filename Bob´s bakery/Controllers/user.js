@@ -24,3 +24,16 @@ exports.login = async (req, res) => {
 
     }
 }
+
+exports.signup = async (req,res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    try {
+    const user = await mapper.createUser(username, password);
+        req.session.user = user;
+      return  res.render('login')
+    }catch (error) {
+        return   res.render('signup');
+    }
+}
