@@ -23,7 +23,7 @@
     const hashPassword  = await findUserByName(username); 
 
     if(bcrypt.compareSync(password, hashPassword) ){
-        const sql = `select * from user where name = ${connection.escape(username)} and password = ${connection.escape(hashPassword)}`;
+        const sql = `select * from users where name = ${connection.escape(username)} and password = ${connection.escape(hashPassword)}`;
 
   const row =  await query(sql);
     if(row.length < 1){
@@ -40,7 +40,7 @@
 }
 
  const findUserById = async (userId)  => {
-    const sql = `select name from user where id = ${connection.escape(userId)} `;
+    const sql = `select name from users where id = ${connection.escape(userId)} `;
     try {
       const row =  await query(sql);
       return row;
@@ -51,7 +51,7 @@
   
     }
 const findUserByName = async (username) => {
-    const sql = `select password from user where name = ${connection.escape(username)} `;
+    const sql = `select password from users where name = ${connection.escape(username)} `;
     try {
       const row =  await query(sql);
       

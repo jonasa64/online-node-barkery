@@ -3,7 +3,7 @@ const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
 
 const getAllProducts = async () => {
-const sql = "select * from  product";
+const sql = "select * from  products";
 try {
   const row =  await query(sql);
   return row
@@ -18,7 +18,7 @@ try {
 
 const getProduct = async (id) => {
  
-const sql = "select * from product where id = " + connection.escape(id);
+const sql = "select * from products where id = " + connection.escape(id);
 
    try {
     const row =  await query(sql)  
