@@ -16,8 +16,12 @@ exports.login = async (req, res) => {
         const user = await mapper.validitUser(name, password);
         req.session.name = user[0].name;
         req.session.userid = user[0].id;
-
+    if(user[0].role === 'admin'){
+        return res.redirect('http://localhost:5000/admin');
+    }else {
         return  res.redirect('http://localhost:5000/user');
+    }
+
     }catch (error) {
         req.flash("error", "falied to login")
      return res.render('login')
