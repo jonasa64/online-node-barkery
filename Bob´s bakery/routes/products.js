@@ -4,9 +4,9 @@ const mapper = require('../mapper/productMapper');
 const productComntroller = require('../Controllers/product');
 const sessionChecker = require('../middeleware')
 
-router.get("/", sessionChecker, productComntroller.getProducts() );
+router.get("/", sessionChecker, productComntroller.getProducts );
    
-router.get("/:id", sessionChecker, productComntroller.getProduct());
+router.get("/:id", sessionChecker, productComntroller.getProduct);
 
 
 module.exports = router;

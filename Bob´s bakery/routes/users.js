@@ -4,17 +4,19 @@ const userController = require('../Controllers/user');
 const sessionChecker = require('../middeleware')
 
 
-router.get('/login', userController.getLoginView());
+router.get('/login', userController.getLoginView);
 
-router.get('/', sessionChecker, userController.getProfile());
+router.get('/', sessionChecker, userController.getProfile);
 
-router.post('/login', userController.login());
+router.post('/login', userController.login);
 
-router.get('/signup', userController.getSingupView());
+router.get('/signup', userController.getSingupView);
 
-router.post('/signup', userController.signup());
+router.post('/signup', userController.signup);
 
-router.post('logout', userController.logout());
+router.post('logout', userController.logout);
+
+router.get('/admin', userController.login);
 
 
 module.exports = router;
