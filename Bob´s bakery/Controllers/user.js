@@ -17,15 +17,23 @@ exports.login = async (req, res) => {
         req.session.name = user[0].name;
         req.session.userid = user[0].id;
     if(user[0].role === 'admin'){
-        return res.redirect('http://localhost:5000/admin');
+         res.redirect('http://localhost:5000/user/admin');
     }else {
-        return  res.redirect('http://localhost:5000/user');
+          res.redirect('http://localhost:5000/user');
     }
 
     }catch (error) {
         req.flash("error", "falied to login")
      return res.render('login')
 
+    }
+}
+
+exports.getAdminView = (req, res) => {
+    try {
+        res.render('admin');
+    }catch (e) {
+        res.send('error');
     }
 }
 

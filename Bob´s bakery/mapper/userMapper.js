@@ -26,6 +26,7 @@
         const sql = `select * from users where name = ${connection.escape(username)} and password = ${connection.escape(hashPassword)}`;
 
   const row =  await query(sql);
+  console.log(row);
     if(row.length < 1){
         return "user not found";  
     }
