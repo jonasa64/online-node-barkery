@@ -6,6 +6,7 @@ const user = require('./routes/users');
 const session = require('express-session');
 const flash = require('express-flash-messages')
 const sessionChecker = require('./middeleware')
+const path = require('path');
 
 const port = process.env.port || 5000;
 
@@ -13,7 +14,7 @@ const port = process.env.port || 5000;
 
 const app = express();
 
-
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 //middelwares
 
