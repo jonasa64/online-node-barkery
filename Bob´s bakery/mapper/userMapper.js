@@ -6,7 +6,7 @@
  
 exports.createUser = async (username, password) => {
      hashPassword = bcrypt.hashSync(password, salt);
-    const sql = `insert into user(name, password) values(${connection.escape(username)}, ${connection.escape(hashPassword)})`;
+    const sql = `insert into users(name, password) values(${connection.escape(username)}, ${connection.escape(hashPassword)})`;
   try {
     const row =  await query(sql);
     return row;   
