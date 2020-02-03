@@ -41,3 +41,11 @@ exports.updateProduct = async (req, res) => {
         return res.send("error");
     }
 }
+
+exports.getEditView = (req, res) => {
+    try {
+        return res.render('/edit/:id');
+    }catch (error) {
+        return res.send("Error");
+    }
+}
