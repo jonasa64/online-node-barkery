@@ -1,4 +1,4 @@
- const bcrypt = require('bcrypt');
+ const bcrypt = require('bcryptjs');
  const connection = require('../config/sql');
  const util = require('util');
  const salt = 10;
