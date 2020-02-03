@@ -17,7 +17,15 @@ try {
 
 }
 
-
+exports.getAllOrders = async() => {
+    const  sql = "select * from orders";
+    try {
+        const row = await query(sql);
+        return row;
+    }catch (error) {
+        return  new Error("server error");
+    }
+}
 
 exports.findOrder = async (orderId) => {
 const sql = `select * from orders where id = ${connection.escape(orderId)}`;
