@@ -6,6 +6,7 @@ const user = require('./routes/users');
 const cart = require('./routes/cart');
 const session = require('express-session');
 const flash = require('express-flash-messages')
+const methodOveride = require('method-override');
 const sessionChecker = require('./middeleware')
 const path = require('path');
 
@@ -14,6 +15,8 @@ const port = process.env.port || 5000;
 
 
 const app = express();
+
+app.use(methodOveride('_method'));
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
