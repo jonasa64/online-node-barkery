@@ -43,3 +43,26 @@ exports.addProduct = async (name, description, price, img=null) => {
 
 }
 
+exports.deleteProduct = async id => {
+    const sql = `delete from products where id = ${query.escape(id)}`;
+
+    try {
+        await query(sql);
+        return "product delete";
+    } catch (error) {
+        return new Error("server error");
+    }
+}
+
+exports.updateProduct = async (name, description, price, img=null) => {
+    const  sql = `update products set name = ${name}, description = ${description}, price= ${price}, img=${img} `;
+
+    try {
+        await query(sql);
+        return "product updated"
+    } catch (error) {
+        return new Error("server error");
+    }
+
+
+}
