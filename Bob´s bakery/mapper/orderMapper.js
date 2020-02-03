@@ -2,7 +2,7 @@ const connection = require('../config/sql');
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
 
-const addOrder = async (userId, productId, quantity, totalPice) => {
+exports.addOrder = async (userId, productId, quantity, totalPice) => {
 const sql = `insert into orders(userId, productId, quantity, totalPice) values(${connection.escape(userId)}, ${connection.escape(productId)},
 ${quantity}, ${totalPice})`;
 try {
@@ -19,7 +19,7 @@ try {
 
 
 
-const findOrder = async (orderId) => {
+exports.findOrder = async (orderId) => {
 const sql = `select * from orders where id = ${connection.escape(orderId)}`;
 try {
   const row =  await query(sql);
@@ -32,7 +32,7 @@ try {
 }
 
 
-const uddatePayStatus = async (orderId) => {
+exports.uddatePayStatus = async (orderId) => {
 const sql = `update orders set isPayed = true where id = ${connection.escape(orderId)}`;
 try {
    const row =  await query(sql);
@@ -45,7 +45,7 @@ try {
 
 }
 
-const findUsersOrder =   async (userId) => {
+exports.findUsersOrder =   async (userId) => {
     const sql = `select * from orders where userId = ${connection.escape(userId)}`;
    try {
    const row = await query(sql);
@@ -57,7 +57,7 @@ const findUsersOrder =   async (userId) => {
    
 }
 
-const deletOrder = async (orderId) => {
+exports.deletOrder = async (orderId) => {
     const sql = `delete from orders where id = ${connection.escape(orderId)}`;
 
     try {
@@ -70,16 +70,4 @@ const deletOrder = async (orderId) => {
     }
         
    
-}
-
-
-
-
-
-module.exports = {
-    addOrder : addOrder,
-    findOrder : findOrder,
-    uddatePayStatus : uddatePayStatus,
-    findUsersOrder : findUsersOrder,
-    deletOrder: deletOrder
 }
