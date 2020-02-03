@@ -20,9 +20,10 @@ exports.createUser = async (username, password) => {
 
 exports.validitUser = async (username , password) => {
     try {
-    const hashPassword  = await findUserByName(username); 
+    const hashPassword  = await findUserByName(username);
 
     if(bcrypt.compareSync(password, hashPassword) ){
+
         const sql = `select * from users where name = ${connection.escape(username)} and password = ${connection.escape(hashPassword)}`;
 
   const row =  await query(sql);
@@ -33,6 +34,7 @@ exports.validitUser = async (username , password) => {
     return row;
 }
 } catch (error) {
+        console.log(error);
     return new Error("server error")
 }  
     
@@ -51,7 +53,7 @@ exports.validitUser = async (username , password) => {
         
   
     }
-exports.findUserByName = async (username) => {
+const findUserByName = async (username) => {
     const sql = `select password from users where name = ${connection.escape(username)} `;
     try {
       const row =  await query(sql);
