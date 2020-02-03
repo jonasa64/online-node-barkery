@@ -28,3 +28,16 @@ exports.deleteProduct = async (req, res) => {
         return res.send("error");
     }
 }
+
+exports.updateProduct = async (req, res) => {
+    const name = req.body.nme;
+    const description = req.body.description;
+    const price = req.body.price;
+    const img = req.body.img;
+    try {
+        await mapper.updateProduct(name,description, price, img);
+        return "product updated"
+    }catch (error) {
+        return res.send("error");
+    }
+}
