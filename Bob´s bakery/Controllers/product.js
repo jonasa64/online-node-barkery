@@ -18,3 +18,13 @@ exports.getProducts = async (req, res) => {
         return res.send("error");
     }
 }
+
+exports.deleteProduct = async (req, res) => {
+        const id = req.params.id;
+    try {
+        await mapper.deleteProduct(id);
+        return "product delete";
+    } catch (error) {
+        return res.send("error");
+    }
+}
