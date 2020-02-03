@@ -2,7 +2,7 @@ const connection = require('../config/sql');
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
 
-const getAllProducts = async () => {
+exports.getAllProducts = async () => {
 const sql = "select * from  products";
 try {
   const row =  await query(sql);
@@ -16,7 +16,7 @@ try {
 
 }
 
-const getProduct = async (id) => {
+exports.getProduct = async (id) => {
  
 const sql = "select * from products where id = " + connection.escape(id);
 
@@ -30,7 +30,16 @@ const sql = "select * from products where id = " + connection.escape(id);
 
 }
 
-module.exports = {
-    getAllProducts: getAllProducts,
-    getProduct : getProduct
+
+exports.addProduct = async (name, description, price, img=null) => {
+    const sql = `insert into products(name,description,price, img)values(${query.escape(name)}, ${description}), ${price}, ${img}`;
+    try {
+        await query(sql);
+
+
+    }catch (error) {
+        return new Error("server Error");
+    }
+
 }
+
