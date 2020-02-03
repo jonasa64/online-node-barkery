@@ -14,6 +14,7 @@ exports.login = async (req, res) => {
 
     try {
         const user = await mapper.validitUser(name, password);
+        console.log(user);
         req.session.name = user[0].name;
         req.session.userid = user[0].id;
     if(user[0].role === 'admin'){
