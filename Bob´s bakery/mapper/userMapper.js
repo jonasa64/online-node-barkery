@@ -4,7 +4,7 @@
  const salt = 10;
  const query = util.promisify(connection.query).bind(connection);
  
- createUser = async (username, password) => {
+exports.createUser = async (username, password) => {
      hashPassword = bcrypt.hashSync(password, salt);
     const sql = `insert into user(name, password) values(${connection.escape(username)}, ${connection.escape(hashPassword)})`;
   try {
@@ -18,7 +18,7 @@
    
  }
 
- validitUser = async (username , password) => {
+exports.validitUser = async (username , password) => {
     try {
     const hashPassword  = await findUserByName(username); 
 
@@ -40,7 +40,7 @@
 
 }
 
- const findUserById = async (userId)  => {
+ exports.findUserById = async (userId)  => {
     const sql = `select name from users where id = ${connection.escape(userId)} `;
     try {
       const row =  await query(sql);
@@ -51,7 +51,7 @@
         
   
     }
-const findUserByName = async (username) => {
+exports.findUserByName = async (username) => {
     const sql = `select password from users where name = ${connection.escape(username)} `;
     try {
       const row =  await query(sql);
@@ -65,8 +65,4 @@ const findUserByName = async (username) => {
 
  
 
-module.exports = {
-    createUser: createUser,
-    validitUser : validitUser,
-    findUserById :  findUserById
-}
+
