@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const products = require('./routes/products');
 const orders = require('./routes/orders');
 const user = require('./routes/users');
+const cart = require('./routes/cart');
 const session = require('express-session');
 const flash = require('express-flash-messages')
 const sessionChecker = require('./middeleware')
@@ -51,6 +52,7 @@ app.set('view engine', 'ejs');
 app.use("/user",  user);
 app.use("/products",  products);
 app.use("/orders", orders);
+app.use('/cart', cart);
 
 
 app.listen(port, () => {
