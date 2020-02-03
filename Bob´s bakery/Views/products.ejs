@@ -6,7 +6,13 @@
         <li><%= product.name%></li> 
         <li><%=product.description%></li> 
         <li><%=product.price%></li> 
-    <li><a href="http://localhost:5000/orders/add-order?productId=<%=product.id%>">order</a></li>
+        <form method="post" action="http://localhost:5000/cart/add">
+            <input type="number" name="quantity" placeholder="quantity" id="quantity">
+            <input type="hidden" name="name"  value="<%=product.name%>">
+            <input type="hidden" name="price"  value="<%=product.price%>">
+            <button>Add to cart</button>
+
+        </form>
     </ul>
      
         <%})%>
