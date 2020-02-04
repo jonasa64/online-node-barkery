@@ -1,0 +1,37 @@
+<h1>cart</h1>
+
+<%if(cart.length === 0 || cart === undefined){%>
+<h3>you cart is empty</h3>
+<%}else {%>
+    <%cart.forEach(function (item, index) {%>
+        <table>
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>quantity</th>
+                <th>item price</th>
+                <th>item total</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr>
+                <td><%=item.name%></td>
+                <td><%=item.qty%></td>
+                <td><%=item.price%></td>
+                <td><%=item.total%></td>
+                <td><form action="http://localhost:5000/cart/<%=index%>?_method=DELETE" method="post">
+                        <button>Remove item</button>
+                    </form></td>
+            </tr>
+
+            </tbody>
+        </table>
+    <%})%>
+
+<%}%>
+
+<a href="http://localhost:5000/products/">continue shopping</a>
+<a href="#">go to check out</a>
+
+
