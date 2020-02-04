@@ -8,6 +8,11 @@ router.get("/", sessionChecker, productComntroller.getProducts );
    
 router.get("/:id", sessionChecker, productComntroller.getProduct);
 
+router.get("/edit/:id", productComntroller.getEditView);
+
+router.put('/edit/:id', productComntroller.updateProduct);
+
+router.delete('/delete/:id', productComntroller.deleteProduct);
 
 module.exports = router;
 
