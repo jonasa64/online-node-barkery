@@ -49,4 +49,14 @@ exports.getAddOrderView = async (req,res) => {
 }
 
 
+exports.getAllOrders = async(req, res) => {
+    try {
+       const orders = await mapper.getAllOrders();
+       return  res.render('orders', {orders: orders});
+    }catch (error) {
+        return res.send('server error');
+    }
+}
+
+
 
