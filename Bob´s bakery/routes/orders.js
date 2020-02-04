@@ -11,6 +11,9 @@ router.get('/order', sessionChecker, orderCrontroller.getOrder);
 
 router.get('/userOrder/:userId', sessionChecker, orderCrontroller.getUserOrders);
 
+router.get('/all', orderCrontroller.getAllOrders);
+
+
 
 
 
