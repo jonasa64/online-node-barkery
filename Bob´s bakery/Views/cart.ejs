@@ -1,33 +1,54 @@
 <h1>cart</h1>
+<%var message = getMessages() %>
+<%if(message.error){%>
+    <%= message.error %>
+<%}else {%>
+    <%=message.success%>
+    <%}%>
+<%var cart;%>
 
-<%if(cart.length === 0 || cart === undefined){%>
+
+<%if(cart === undefined){%>
 <h3>you cart is empty</h3>
 <%}else {%>
-    <%cart.forEach(function (item, index) {%>
-        <table>
-            <thead>
-            <tr>
-                <th>name</th>
-                <th>quantity</th>
-                <th>item price</th>
-                <th>item total</th>
-            </tr>
+<table>
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>quantity</th>
+        <th>item price</th>
+        <th>item total</th>
+    </tr>
 
-            </thead>
-            <tbody>
+    </thead>
+    <tbody>
+    <%cart.forEach(function (item, index) {%>
+
+
             <tr>
                 <td><%=item.name%></td>
-                <td><%=item.qty%></td>
+                <td>
+                    <select id="qty"><%for (var i = 1; i < (item.qty +5); i++){%>
+                        <%if(i == item.qty){%>
+                        <option selected value="<%=i%>"><%=i%></option>
+                        <%}else {%>
+                        <option  value="<%=i%>"><%=i%></option>
+                        <%}%>
+                        <%}%></select>
+                    <input type="hidden" id="index" value="<%=index%>">
+                </td>
                 <td><%=item.price%></td>
                 <td><%=item.total%></td>
+                <td><button id="update">Update</button></td>
                 <td><form action="http://localhost:5000/cart/<%=index%>?_method=DELETE" method="post">
                         <button>Remove item</button>
                     </form></td>
             </tr>
 
-            </tbody>
-        </table>
+
     <%})%>
+            </tbody>
+</table>
 
 <%}%>
 
@@ -35,3 +56,26 @@
 <a href="#">go to check out</a>
 
 
+
+<script>
+   document.getElementById('update').addEventListener('click', update);
+
+   function update(e){
+       e.preventDefault();
+       var index = document.getElementById('index').value;
+       var newQty = document.getElementById('qty').value;
+       var data = {quantity : newQty}
+       fetch("http://localhost:5000/cart/" + index, {
+           method : "PUT",
+           headers : {
+               'Content-Type': 'application/json'
+           },
+           body : JSON.stringify(data),
+       }).then(function (response) {
+            response.json();
+       }).then(function (data) {
+           window.location.href = "http://localhost:5000/cart/show";
+    console.log(data);
+       })
+   }
+</script>
