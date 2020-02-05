@@ -17,6 +17,7 @@ exports.login = async (req, res) => {
         console.log(user);
         req.session.name = user[0].name;
         req.session.userid = user[0].id;
+        req.session.role = user[0].role;
     if(user[0].role === 'admin'){
          res.redirect('http://localhost:5000/user/admin');
     }else {
