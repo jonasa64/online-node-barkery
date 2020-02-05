@@ -42,10 +42,33 @@ exports.updateProduct = async (req, res) => {
     }
 }
 
-exports.getEditView = (req, res) => {
+exports.getEditView = async (req, res) => {
+    const id = req.params.id;
     try {
-        return res.render('/edit/:id');
+        const product = mapper.getProduct();
+        return res.render('productEdit', {product : product});
     }catch (error) {
         return res.send("Error");
+    }
+}
+
+exports.getAddProduct = (req, res) => {
+    try {
+        return res.render('addProduct');
+    }catch (error) {
+        return res.send("server error");
+    }
+}
+
+exports.addProduct = async (req,res) => {
+    const name = req.body.name;
+    const description = req.body.description;
+    const price = req.body.price;
+    const img = req.body.img;
+    try {
+        await mapper.addProduct(name, description, price, img);
+        return "product created";
+    }catch (error) {
+        return res.send("error");
     }
 }
