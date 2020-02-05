@@ -1,0 +1,9 @@
+<form method="post" action="/edit/<%=product.id%>?_method=PUT">
+    <input type="text" name="name" value="<%=product.name%>" >
+    <textarea name="description"><%=product.description%></textarea>
+    <input type="number" name="price" value="<%=product.price%>">
+    <input type="text" name="img" value="<%=product.img%>">
+
+    <button>Update</button>
+
+</form>
