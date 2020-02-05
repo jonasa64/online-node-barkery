@@ -6,13 +6,13 @@ add CSS and navbar to the views
 
 change render to redirect where needed
 
-make a shoping cart 
+make a check out page 
 
-make a admin section 
+finish admin section 
 
 add redis for session and caching
 
-add flash message where missing
+finish adding flash message where needed
 
 deploy 
 
