@@ -13,7 +13,7 @@ exports.getProduct = async (req,res) => {
 exports.getProducts = async (req, res) => {
     try {
         const products = await mapper.getAllProducts();
-        return  res.render("products", {products:products });
+        return  res.render("products", {products:products ,  role : req.session.role });
     }catch (error) {
         return res.send("error");
     }
