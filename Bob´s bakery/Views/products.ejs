@@ -6,6 +6,9 @@
         <li><%= product.name%></li> 
         <li><%=product.description%></li> 
         <li><%=product.price%></li> 
+        <%if(role == 'admin'){%>
+          <a href="http://localhost:5000/products/edit/<%=product.id%>">Edit</a>
+          <%} else {%>
         <form method="post" action="http://localhost:5000/cart/add">
             <input type="number" name="quantity" placeholder="quantity" id="quantity">
             <input type="hidden" name="name"  value="<%=product.name%>">
@@ -13,6 +16,7 @@
             <button>Add to cart</button>
 
         </form>
+         <%}%>
     </ul>
      
         <%})%>
