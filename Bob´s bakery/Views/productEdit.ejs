@@ -1,8 +1,8 @@
-<form method="post" action="/edit/<%=product.id%>?_method=PUT">
-    <input type="text" name="name" value="<%=product.name%>" >
-    <textarea name="description"><%=product.description%></textarea>
-    <input type="number" name="price" value="<%=product.price%>">
-    <input type="text" name="img" value="<%=product.img%>">
+<form method="post" action="http://localhost:5000/products/edit/<%=product[0]/edit/<%=product.id%>?_method=PUT">
+    <input type="text" name="name" value="<%=product[0].name%>" >
+    <textarea name="description"><%=product[0].description%></textarea>
+    <input type="number" name="price" value="<%=product[0].price%>">
+    <input type="text" name="img" value="<%=product[0].img%>">
 
     <button>Update</button>
 
