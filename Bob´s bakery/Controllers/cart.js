@@ -55,6 +55,7 @@ exports.addToCart = (req, res) => {
 
 
    const item = {
+       id: req.body.productId, 
        name : req.body.name,
        qty : req.body.quantity,
        price : req.body.price,
