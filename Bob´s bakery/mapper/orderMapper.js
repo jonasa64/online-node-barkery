@@ -2,9 +2,9 @@ const connection = require('../config/sql');
 const util = require('util');
 const query = util.promisify(connection.query).bind(connection);
 
-exports.addOrder = async (userId, productId, quantity, totalPice) => {
-const sql = `insert into orders(userId, productId, quantity, totalPice) values(${connection.escape(userId)}, ${connection.escape(productId)},
-${quantity}, ${totalPice})`;
+exports.addOrder = async (userId, productId, quantity, totalPice, name, email, address, city, province, zip) => {
+const sql = `insert into orders(userId,productId,quantity,totalPice,name,email,address,city,province,zip) values(${connection.escape(userId)}, ${connection.escape(productId)},
+ ${connection.escape(quantity)},${connection.escape(totalPice)},${connection.escape(name)},${connection.escape(email)},${connection.escape(address)},${connection.escape(city)},${connection.escape(province)},${connection.escape(zip)})`;
 try {
   const row =  await query(sql);
   return row 
