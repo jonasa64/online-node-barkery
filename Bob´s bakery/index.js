@@ -4,6 +4,7 @@ const products = require('./routes/products');
 const orders = require('./routes/orders');
 const user = require('./routes/users');
 const cart = require('./routes/cart');
+const checkOut = require('./routes/checkOut');
 const session = require('express-session');
 const flash = require('express-flash-messages')
 const methodOveride = require('method-override');
@@ -56,6 +57,7 @@ app.use("/user",  user);
 app.use("/products",  products);
 app.use("/orders", orders);
 app.use('/cart', cart);
+app.use('/checkout',checkOut);
 
 
 app.listen(port, () => {
