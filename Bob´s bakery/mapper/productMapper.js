@@ -54,9 +54,8 @@ exports.deleteProduct = async id => {
     }
 }
 
-exports.updateProduct = async (name, description, price, img, id) => {
+exports.updateProduct = async (name, description, price, img,, id) => {
     const  sql = `update products set name = ${connection.escape(name)}, description = ${connection.escape(description)}, price= ${connection.escape(price)}, img=${connection.escape(img)} where id = ${connection.escape(id)}`;
-
     try {
         await query(sql);
         return "product updated"
