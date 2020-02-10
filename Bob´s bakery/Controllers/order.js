@@ -3,7 +3,7 @@ const productMapper = require('../mapper/productMapper')
 
 exports.getOrder =  async (req, res) => {
     try {
-        const  order = await mapper.findOrder(req.query.orderId);
+        const  order = await mapper.findOrder(req.params.orderId);
             return res.render(`order`, {order: order});
 
     } catch (e) {
