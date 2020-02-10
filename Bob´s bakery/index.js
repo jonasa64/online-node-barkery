@@ -5,6 +5,7 @@ const orders = require('./routes/orders');
 const user = require('./routes/users');
 const cart = require('./routes/cart');
 const checkOut = require('./routes/checkOut');
+const thankyou = require('./routes/thankyou');
 const session = require('express-session');
 const flash = require('express-flash-messages')
 const methodOveride = require('method-override');
@@ -58,7 +59,7 @@ app.use("/products",  products);
 app.use("/orders", orders);
 app.use('/cart', cart);
 app.use('/checkout',checkOut);
-
+app.use('/thankyou', thankyou);
 
 app.listen(port, () => {
     console.log(`server started on  ${port}`);
