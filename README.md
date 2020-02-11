@@ -6,9 +6,7 @@ add CSS and navbar to the views
 
 change render to redirect where needed
 
-make a check out page 
-
-finish admin section 
+ finish admin section 
 
 add redis for session and caching
 
